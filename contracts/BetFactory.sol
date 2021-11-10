@@ -13,12 +13,6 @@ contract BetFactory {
     Bet[] public bets;
     // IOzToken ozContract;
     address owner;
-    
-    constructor(/*address _ozAddress*/){
-        id = 0;
-        //ozContract = IOzToken(_ozAddress);
-        owner = msg.sender;
-    }
 
     struct Bet{
         uint id;
@@ -27,22 +21,23 @@ contract BetFactory {
         bool ended;             // estado de la apuesta: finalizada o no.
         bool gamblerCashOut;    // estado del jugador: si retiro el dinero ganado o no.     
         uint amount;            // precio apostado.
-        //mapping(address => uint256)  ofertasLicitadores; //Hash-> licitadores-ofertas
     }
 
     event makeBet(address casino, uint amount, address gambler);
     event makeWithdraw(address casino, address gambler, uint amount);
     
-    function createBet (address _casino) public returns(uint){
-        require (_casino != address(0), "Se necesita una cuenta para iniciar una subasta.");
-        bets.push();
-        uint idNuevaSubasta = id;
+    function createBet (address casino, address gamblerAddress, uint amount) public returns(uint){
+        require (casino != address(0), "Se necesita una cuenta para iniciar una subasta.");
+        
+        uint newBetId = id;
         id ++;
-        return idNuevaSubasta;
-    }
+    
+        bets.push(Bet(newBetId, casino, gamblerAddress, false, false, amount));
 
-    /* creo que esto no sera necesario. */
-    function getIdSubastasDisponibles() view public returns(uint[] memory){}
+        emit makeBet(casino, amount, gamblerAddress);
+
+        return newBetId;
+    }
 
     /* esto que seria ? */
     /*function setTokenAdress(address _ozAddress) public payable returns(bool){
@@ -53,14 +48,13 @@ contract BetFactory {
 
 
     function retirarFondos(uint _id , address _account ) public payable betIsEnded(_id) returns (uint){
-
         address winnerAccount;
         uint amount;
 
         Bet storage b = bets[_id];
         require ( b.ended , "La apuesta no ha finalizado.");
        
-        if(_account == b.gambler){ //el duenio tiene que poder retirar el dinero ganado en la subasta
+        if(_account == b.gambler){ //el duenio tiene que poder retirar el dinero ganado en la apuesta
             winnerAccount = b.gambler;
             amount = b.amount * 2; /* aca duplica su dinero, podria cambiarse. */
             /* es necesario un booleano para ver si retiro el dinero? */
