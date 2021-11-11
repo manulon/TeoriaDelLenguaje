@@ -35,7 +35,7 @@ interface TokenInterface_ERC_20 {
     event Approval(address indexed _owner, address indexed _spender, uint256 _value);
 }
 
-contract casinoToken is TokenInterface_ERC_20 {
+abstract contract ERC_20 is TokenInterface_ERC_20 {
     mapping (address => uint256) public balances;
     mapping (address => mapping (address => uint256)) public _allowances;
     uint256 public _totalSupply;
@@ -44,6 +44,7 @@ contract casinoToken is TokenInterface_ERC_20 {
     string public _symbol;
 
     constructor(uint256 _initialAmount, string memory _tokenName, uint8 _decimalUnits, string  memory _tokenSymbol) {
+        require(_initialAmount <= 1e24, "Error: amount requested of tokens");
         balances[msg.sender] = _initialAmount;               // Give the creator all initial tokens
         _totalSupply = _initialAmount;                        // Update total supply
         _name = _tokenName;                                   // Set the name for display purposes
@@ -99,5 +100,13 @@ contract casinoToken is TokenInterface_ERC_20 {
 
     function allowance(address _owner, address _spender) public override view returns (uint256 remaining) {
         return _allowances[_owner][_spender];
+    }
+}
+
+contract casinoToken is ERC_20 {
+    address public tokenOwner;
+
+    constructor () ERC_20(10, "Casino token", 0, "casino") {
+        tokenOwner = msg.sender;
     }
 }
