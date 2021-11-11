@@ -1,11 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0
 pragma solidity ^0.8.0;
 
-/* nuestro token
-import "./ozToken.sol";
-import "./IOzToken.sol";
-*/
-
 import "./TableFactory.sol";
 
 contract BetFactory {
@@ -38,11 +33,13 @@ contract BetFactory {
     
         bets.push(Bet(newBetId, gamblerAddress, false, false, amount, n));
 
-        // para que corno servia esto?
+        // saco la guita 
         emit makeBet(casino, amount, gamblerAddress);
 
         return newBetId;
     }
+
+
 
     /* esto que seria ? */
     /*function setTokenAdress(address _ozAddress) public payable returns(bool){
@@ -80,6 +77,8 @@ contract BetFactory {
             amount = b.amount * 2; /* aca duplica su dinero, podria cambiarse. */
             /* es necesario un booleano para ver si retiro el dinero? */
         }
+        /* pagar */
+        /* evento */
     }
 
     function closeBets(address tableAddress) public returns(bool){
