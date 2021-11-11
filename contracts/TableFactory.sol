@@ -45,4 +45,29 @@ contract TableFactory {
     function getAddress() view external returns(address){
         return contractAddress;
     }
+
+    function _closeTable(address betsAddress) public returns(bool){
+        (bool success1, bytes memory data1) = 
+                            betsAddress.call(abi.encodeWithSignature
+                            ('tableIsFull()'));
+        require (success1, "Error");
+        (bool tableIsFull) = abi.decode(data1, (bool));
+
+        if (!tableIsFull){
+            return tableIsFull;
+        }
+
+        (bool success2, bytes memory data2) = 
+                            betsAddress.call(abi.encodeWithSignature
+                            ('closeBets(address)', contractAddress));
+        require (success2, "Error");
+        (bool betsClosed) = abi.decode(data2, (bool));
+        require(betsClosed, "Ha ocurrido un error al momento de cerrar las apuestas");
+
+        return tableIsFull;
+    }
+
+    function getWinnerNumber(uint id) public view returns(uint){
+        return tables[id].number;
+    }
 }
