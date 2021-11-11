@@ -40,8 +40,38 @@ contract Token721 is ERC165, IERC721{
         emit Transfer(address(0), to, tokenId);
     }
 
-    function transferFrom(address from, address to, uint256 tokenId){
-        
+    function safeTransferFrom(address from, address to, uint256 tokenId) public virtual override{
+        safeTransferFrom(from, to, tokenId, "");
+    }
+
+    function safeTransferFrom(address from, address to, uint256 tokenId, bytes memory _data) public virtual override{
+        require(_isApprovedOrOwner(msg.sender, tokenId), "ERC721 ERR: You need permission or ownership for this operation");
+        _safeTransfer(from, to, tokenId, _data);
+    }
+
+    function _safeTransfer(address from, address to, uint256 tokenId, bytes memory _data) internal virtual{
+        _transfer(from, to, tokenId);
+        require(_checkOnERC721Received(from, to, tokenId, _data), "ERC721 ERR: Transfer to non ERC721Receiver implementer");
+    }
+
+    function transferFrom(address from, address to, uint256 tokenId)public virtual override{
+        require(_isApprovedOrOwner(msg.sender, tokenId), "ERC721 ERR: You need permission or ownership for this operation");
+        _transfer(from, to);
+    }
+
+    function _transfer(address from, address to, uint256 tokenId) internal virtual{
+        require(ownerOf(tokenId) == from, "ERC721 ERR: from is not the owner of the token or it doesnt exist");
+        require(to!= adress(0), "ERC721 ERR: cannot send token to address 0");
+
+        _balances[from] -= 1;
+        _balances[to] += 1;
+        _owners[tokenId] = to;
+
+        emit Transfer(from, to, tokenId);
+    }
+
+    function _isApprovedOrOwner(address operator, uint256 tokenId) internal view returns(bool){
+        return operator == ownerOf(tokenId) || operator == getApproved(tokenId) || isApprovedForAll(ownerOf(tokenId), operator);
     }
 
     function balanceOf(address _owner) external view returns (uint256){
@@ -64,7 +94,7 @@ contract Token721 is ERC165, IERC721{
         _approve(to, tokenId);
     }
 
-    function getApproeved(uint256 tokenId) public view virtual override returns(address){
+    function getApproved(uint256 tokenId) public view virtual override returns(address){
         require(_exists(tokenId), "ERC721 ERR: Token doesnt exist");
         return _tokenApprovals[tokenId];
     }
