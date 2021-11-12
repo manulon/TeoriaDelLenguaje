@@ -8,9 +8,9 @@ contract Gambler {
     uint tableNumber;
     uint number;
 
-    constructor(){
+    constructor(address _account){
         number = 0;
-        //recibo por parametro el account???
+        gamblerAccount = _account;
     }
 
     event joinTable(uint tableId, address gamblerAccount, uint amount);
