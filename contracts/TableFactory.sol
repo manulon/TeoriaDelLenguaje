@@ -5,8 +5,8 @@ pragma experimental ABIEncoderV2;
 contract TableFactory {
     address contractAddress;
 
-    constructor(address _address){
-        contractAddress = _address;
+    constructor(){
+        contractAddress = address(this);
     }
 
     event NewTable(uint id, uint randomNumber, uint8 maxPlayers);

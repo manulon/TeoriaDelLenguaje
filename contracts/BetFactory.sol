@@ -1,21 +1,19 @@
 // SPDX-License-Identifier: GPL-3.0
 pragma solidity ^0.8.0;
 
-/* nuestro token
-import "./ozToken.sol";
-import "./IOzToken.sol";
-*/
-
 import "./TableFactory.sol";
+import "./erc20.sol";
 
 contract BetFactory {
     uint public id;
     Bet[] public bets;
     // IOzToken ozContract;
     address casino;
+    address _erc20address;
 
-    constructor(address _casinoAddress){
+    constructor(address _casinoAddress, address erc20address){
         casino = _casinoAddress;
+        _erc20address = erc20address;
     }
 
     struct Bet{
@@ -23,14 +21,24 @@ contract BetFactory {
         address gambler;        // address del jugador
         bool ended;             // estado de la apuesta: finalizada o no.
         bool gamblerCashOut;    // estado del jugador: si retiro el dinero ganado o no.     
-        uint amount;            // precio apostado.
+        uint256 amount;            // precio apostado.
         uint number;            // numero que se aposto.
     }
 
     event makeBet(address casino, uint amount, address gambler);
-    //event makeWithdraw(address casino, address gambler, uint amount);
+    event makeWithdraw(address casino, address gambler, uint256 amount);
     
-    function createBet (address gamblerAddress, uint amount, uint n) public returns(uint){
+    function buyChips(address _gamblerAccount, uint256 amount) public returns(bool){
+        (bool success, bytes memory data) = 
+                            _erc20address.call(abi.encodeWithSignature
+                            ('transfer(address, uint256)', _gamblerAccount, amount));
+        require (success, "Error");
+        (bool transactionSucced) = abi.decode(data, (bool));
+                     
+        return transactionSucced;
+    }
+    
+    function createBet (address gamblerAddress, uint256 amount, uint n) public returns(uint){
         require (casino != address(0), "Se necesita una cuenta para iniciar una subasta.");
         
         uint newBetId = id;
@@ -38,11 +46,23 @@ contract BetFactory {
     
         bets.push(Bet(newBetId, gamblerAddress, false, false, amount, n));
 
-        // para que corno servia esto?
-        emit makeBet(casino, amount, gamblerAddress);
-
-        return newBetId;
+        // saco la guita 
+        (bool success, bytes memory data) = 
+                            _erc20address.call(abi.encodeWithSignature
+                            ('transferFrom(address, address, uint256)', gamblerAddress, casino, amount));
+        require (success, "Error");
+        (bool transactionSucced) = abi.decode(data, (bool));
+        
+        if (transactionSucced){
+            emit makeBet(casino, amount, gamblerAddress);
+            return newBetId;
+        }
+        
+        return 0;
+        
     }
+
+
 
     /* esto que seria ? */
     /*function setTokenAdress(address _ozAddress) public payable returns(bool){
@@ -62,29 +82,41 @@ contract BetFactory {
         return false;
     }
 
-    function makeWithdraw(uint _id, address tableAddress) public {
+    function _makeWithdraw(uint _id, address tableAddress) public {
         address winnerAccount;
         uint amount;
 
         Bet storage b = bets[_id];
         require ( b.ended , "La apuesta no ha finalizado.");
        
-        (bool success, bytes memory data) = 
+        (bool success1, bytes memory data1) = 
                             tableAddress.call(abi.encodeWithSignature
                             ('getWinnerNumber(uint)', _id));
-        require (success, "Error");
-        (uint winnerNumber) = abi.decode(data, (uint));
+        require (success1, "Error");
+        (uint winnerNumber) = abi.decode(data1, (uint));
 
         if (b.number == winnerNumber) {
             winnerAccount = b.gambler;
             amount = b.amount * 2; /* aca duplica su dinero, podria cambiarse. */
             /* es necesario un booleano para ver si retiro el dinero? */
         }
+        
+        (bool success2, bytes memory data2) = 
+                            _erc20address.call(abi.encodeWithSignature
+                            ('transferFrom(addres, address, uint256)', casino, winnerAccount, amount));
+        require (success2, "Error");
+        (bool transactionSucced) = abi.decode(data2, (bool));
+        
+        if (transactionSucced){
+            emit makeWithdraw(casino, winnerAccount, amount);        
+        }
+        
+        /*excepcion o error?*/
     }
 
     function closeBets(address tableAddress) public returns(bool){
         for (uint i=0; i<bets.length; i++){
-            makeWithdraw(i, tableAddress);
+            _makeWithdraw(i, tableAddress);
         }
         return true;
     }
