@@ -3,6 +3,7 @@ pragma solidity ^0.8.0;
 
 import "./ERC165.sol";
 import "./ERC721.sol";
+import "./IERC721Receiver.sol";
 
 contract Token721 is ERC165, IERC721{
     // tokenId => owner_address mapping
@@ -17,7 +18,7 @@ contract Token721 is ERC165, IERC721{
     // operator approved for all tokens of other address
     mapping(address => mapping(address => bool)) _operatorApprovals;
 
-    function supportsInterface(bytes4 interfaceId) public view virtual override(IERC165) returns(bool){
+    function supportsInterface(bytes4 interfaceId) public view virtual override(IERC165, ERC165) returns(bool){
         return interfaceId == type(IERC721).interfaceId || super.supportsInterface(interfaceId);
     }
 
@@ -56,12 +57,12 @@ contract Token721 is ERC165, IERC721{
 
     function transferFrom(address from, address to, uint256 tokenId)public virtual override{
         require(_isApprovedOrOwner(msg.sender, tokenId), "ERC721 ERR: You need permission or ownership for this operation");
-        _transfer(from, to);
+        _transfer(from, to, tokenId);
     }
 
     function _transfer(address from, address to, uint256 tokenId) internal virtual{
         require(ownerOf(tokenId) == from, "ERC721 ERR: from is not the owner of the token or it doesnt exist");
-        require(to!= adress(0), "ERC721 ERR: cannot send token to address 0");
+        require(to!= address(0), "ERC721 ERR: cannot send token to address 0");
 
         _balances[from] -= 1;
         _balances[to] += 1;
@@ -74,12 +75,12 @@ contract Token721 is ERC165, IERC721{
         return operator == ownerOf(tokenId) || operator == getApproved(tokenId) || isApprovedForAll(ownerOf(tokenId), operator);
     }
 
-    function balanceOf(address _owner) external view returns (uint256){
+    function balanceOf(address _owner) external view override returns (uint256){
         require(_owner != address(0), "Can't check balance of 0-address");
         return _balances[_owner];
     }
 
-    function ownerOf(uint256 tokenId) public view returns(address owner){
+    function ownerOf(uint256 tokenId) public view override returns(address _owner){
         address owner = _owners[tokenId];
         require(owner != address(0), "ERC721 ERR: tokenId does not exist");
         return owner;
@@ -104,8 +105,8 @@ contract Token721 is ERC165, IERC721{
         emit Approval(ownerOf(tokenId), to, tokenId);
     }
 
-    function setApprovalForAll(address operator, bool approved) public view virtual override returns (bool){
-        require(msg.sender != owner, "ERC721 ERR: Destination must be different address than owner");
+    function setApprovalForAll(address operator, bool approved) public virtual override{
+        require(msg.sender != operator, "ERC721 ERR: Destination must be different");
         _operatorApprovals[msg.sender][operator] = approved;
         emit ApprovalForAll(msg.sender, operator, approved);
     }
@@ -128,14 +129,14 @@ contract Token721 is ERC165, IERC721{
                 if (reason.length == 0){
                     revert("ERC721 ERR: Transfer to non ERC721Receiver implementer");
                 } else {
+                    // solhint-disable-next-line no-inline-assembly
                     assembly {
-                        revert(add(32, reason), mload(reason));
+                        revert(add(32, reason), mload(reason))
                     }
                 }
             }
-        } else {
-            return True
         }
+        return true;
     }
 
     function isContract(address addr) private view returns(bool){
