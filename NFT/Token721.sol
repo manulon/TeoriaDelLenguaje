@@ -5,6 +5,15 @@ import "./ERC165.sol";
 import "./ERC721.sol";
 
 contract Token721 is ERC165, IERC721{
+    string public _name;
+    string public _symbol;
+    
+    constructor
+    (string memory _tokenName, string  memory _tokenSymbol) {
+        _name = _tokenName;                                   // Set the name for display purposes
+        _symbol = _tokenSymbol;                               // Set the symbol for display purposes
+    }
+
     // tokenId => owner_address mapping
     mapping(uint256 => address) private _owners;
 
@@ -134,7 +143,7 @@ contract Token721 is ERC165, IERC721{
                 }
             }
         } else {
-            return True
+            return True;
         }
     }
 
