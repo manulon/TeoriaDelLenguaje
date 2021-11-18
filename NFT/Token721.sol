@@ -16,7 +16,7 @@ contract Token721 is ERC165, IERC721{
     mapping(uint256 => address) private _tokenApprovals;
 
     // operator approved for all tokens of other address
-    mapping(address => mapping(address => bool)) _operatorApprovals;
+    mapping(address => mapping(address => bool)) private _operatorApprovals;
 
     function supportsInterface(bytes4 interfaceId) public view virtual override(IERC165, ERC165) returns(bool){
         return interfaceId == type(IERC721).interfaceId || super.supportsInterface(interfaceId);
