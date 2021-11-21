@@ -2,9 +2,10 @@
 pragma solidity ^0.8.0;
 
 import "./ERC165.sol";
-import "./ERC721.sol";
+import "./IERC721.sol";
 import "./IERC721Receiver.sol";
 import "./IERC721Metadata.sol";
+import "@openzeppelin/contracts/utils/Strings.sol";
 
 abstract contract Token721 is ERC165, IERC721, IERC721Metadata {
     // tokenId => owner_address mapping
@@ -18,6 +19,15 @@ abstract contract Token721 is ERC165, IERC721, IERC721Metadata {
 
     // operator approved for all tokens of other address
     mapping(address => mapping(address => bool)) private _operatorApprovals;
+
+    string public _name;
+    uint8 public _decimals;
+    string public _symbol;
+
+    constructor(string memory _tokenName, string  memory _tokenSymbol) {
+        _name = _tokenName;                                                            
+        _symbol = _tokenSymbol;                              
+    }
 
     function supportsInterface(bytes4 interfaceId) public view virtual override(IERC165, ERC165) returns(bool){
         return interfaceId == type(IERC721).interfaceId || super.supportsInterface(interfaceId);
@@ -146,6 +156,30 @@ abstract contract Token721 is ERC165, IERC721, IERC721Metadata {
             size := extcodesize(addr)
         }
         return (size > 0);
+    }
+
+        /**
+     * @dev See {IERC721Metadata-name}.
+     */
+    function name() public view virtual override returns (string memory) {
+        return _name;
+    }
+
+    /**
+     * @dev See {IERC721Metadata-symbol}.
+     */
+    function symbol() public view virtual override returns (string memory) {
+        return _symbol;
+    }
+
+    /**
+     * @dev See {IERC721Metadata-tokenURI}.
+     */
+    function tokenURI(uint256 tokenId) public view virtual override returns (string memory) {
+        require(_exists(tokenId), "ERC721Metadata: URI query for nonexistent token");
+
+        string memory baseURI = _baseURI();
+        return bytes(baseURI).length > 0 ? string(abi.encodePacked(baseURI, tokenId.toString())) : "";
     }
 
     /**
