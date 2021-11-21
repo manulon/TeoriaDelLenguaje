@@ -4,8 +4,9 @@ pragma solidity ^0.8.0;
 import "./ERC165.sol";
 import "./ERC721.sol";
 import "./IERC721Receiver.sol";
+import "./IERC721Metadata.sol";
 
-contract Token721 is ERC165, IERC721{
+abstract contract Token721 is ERC165, IERC721, IERC721Metadata {
     // tokenId => owner_address mapping
     mapping(uint256 => address) private _owners;
 
@@ -146,4 +147,14 @@ contract Token721 is ERC165, IERC721{
         }
         return (size > 0);
     }
+
+    /**
+     * @dev Base URI for computing {tokenURI}. If set, the resulting URI for each
+     * token will be the concatenation of the `baseURI` and the `tokenId`. Empty
+     * by default, can be overriden in child contracts.
+     */
+    function _baseURI() internal view virtual returns (string memory) {
+        return "";
+    }
+
 }
