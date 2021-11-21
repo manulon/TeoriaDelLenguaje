@@ -5,7 +5,7 @@ import "./ERC165.sol";
 import "./IERC721.sol";
 import "./IERC721Receiver.sol";
 import "./IERC721Metadata.sol";
-import "@openzeppelin/contracts/utils/Strings.sol";
+import "./Strings.sol";
 
 abstract contract Token721 is ERC165, IERC721, IERC721Metadata {
     // tokenId => owner_address mapping
@@ -179,7 +179,7 @@ abstract contract Token721 is ERC165, IERC721, IERC721Metadata {
         require(_exists(tokenId), "ERC721Metadata: URI query for nonexistent token");
 
         string memory baseURI = _baseURI();
-        return bytes(baseURI).length > 0 ? string(abi.encodePacked(baseURI, tokenId.toString())) : "";
+        return bytes(baseURI).length > 0 ? string(abi.encodePacked(baseURI, Strings.toString(tokenId))) : "";
     }
 
     /**

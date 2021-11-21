@@ -2,7 +2,7 @@
 pragma solidity ^0.8.0;
 
 import "./Token721.sol";
-import "@openzeppelin/contracts/utils/Counters.sol";
+import "./Counters.sol";
 
 contract Vinylmations is Token721 {
     using Counters for Counters.Counter;
