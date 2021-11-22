@@ -11,7 +11,7 @@ contract Vinylmations is Token721 {
     constructor() Token721("Vinylmations", "VNM") {}
 
     function _baseURI() internal pure override returns (string memory) {
-        return "http://1239-190-18-154-46.ngrok.io/api/erc721/1";
+        return "http://26ca-190-18-154-46.ngrok.io/api/erc721/1?id=";
     }
 
     function mint(address to)
@@ -22,5 +22,18 @@ contract Vinylmations is Token721 {
         _safeMint(to, _tokenIdCounter.current());
 
         return _tokenIdCounter.current();
+    }
+
+    function mintNFT(address recipient, string memory tokenURI)
+        public 
+        returns (uint256)
+    {
+        _tokenIdCounter.increment();
+
+        uint256 newItemId = _tokenIdCounter.current();
+        _mint(recipient, newItemId);
+        _setTokenURI(newItemId, tokenURI);
+
+        return newItemId;
     }
 }

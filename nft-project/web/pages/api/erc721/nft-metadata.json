@@ -1,0 +1,24 @@
+{
+    "1": {
+        "attributes": [
+            {
+                "trait_type": "Tier",
+                "value": "Rare"
+            }
+        ],
+        "description": "Peace and Love",
+        "image": "https://gateway.pinata.cloud/ipfs/QmaYue9pNyH8U38WVLFq8wBBAqeEp2WCYkmS9mRwFDJyoo",
+        "name": "Cars Hippie George Carlin"
+    },
+    "2": {
+        "attributes": [
+            {
+                "trait_type": "Tier",
+                "value": "Rare"
+            }
+        ],
+        "description": "I never look back, darling. It’s distract from the now",
+        "image": "https://gateway.pinata.cloud/ipfs/QmXKxgdLkYFzyhyM8Xzzh8RbComyX2xxPFbwsbLKBppnU8",
+        "name": "Edna Moda"
+    }
+}

@@ -20,8 +20,10 @@ abstract contract Token721 is ERC165, IERC721, IERC721Metadata {
     // operator approved for all tokens of other address
     mapping(address => mapping(address => bool)) private _operatorApprovals;
 
+    // Optional mapping for token URIs
+    mapping(uint256 => string) private _tokenURIs;
+
     string public _name;
-    uint8 public _decimals;
     string public _symbol;
 
     constructor(string memory _tokenName, string  memory _tokenSymbol) {
@@ -158,7 +160,7 @@ abstract contract Token721 is ERC165, IERC721, IERC721Metadata {
         return (size > 0);
     }
 
-        /**
+            /**
      * @dev See {IERC721Metadata-name}.
      */
     function name() public view virtual override returns (string memory) {
@@ -180,6 +182,18 @@ abstract contract Token721 is ERC165, IERC721, IERC721Metadata {
 
         string memory baseURI = _baseURI();
         return bytes(baseURI).length > 0 ? string(abi.encodePacked(baseURI, Strings.toString(tokenId))) : "";
+    }
+
+        /**
+     * @dev Sets `_tokenURI` as the tokenURI of `tokenId`.
+     *
+     * Requirements:
+     *
+     * - `tokenId` must exist.
+     */
+    function _setTokenURI(uint256 tokenId, string memory _tokenURI) internal virtual {
+        require(_exists(tokenId), "ERC721URIStorage: URI set of nonexistent token");
+        _tokenURIs[tokenId] = _tokenURI;
     }
 
     /**

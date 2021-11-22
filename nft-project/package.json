@@ -3,6 +3,7 @@
     "@nomiclabs/hardhat-ethers": "^2.0.2"
   },
   "dependencies": {
+    "@alch/alchemy-web3": "^1.1.8",
     "@openzeppelin/contracts": "^4.3.3"
   }
 }

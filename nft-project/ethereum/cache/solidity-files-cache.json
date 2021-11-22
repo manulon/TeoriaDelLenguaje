@@ -37,8 +37,8 @@
       ]
     },
     "/home/laptop-hp/Escritorio/FAC ING/TDL/TeoriaDelLenguaje/nft-project/ethereum/contracts/Vinylmations.sol": {
-      "lastModificationDate": 1637509577738,
-      "contentHash": "0ce4e9be7dc34f96b21f914c92575a4b",
+      "lastModificationDate": 1637610606030,
+      "contentHash": "8e0f382675e602e83fb3e2aa81e83bb0",
       "sourceName": "contracts/Vinylmations.sol",
       "solcConfig": {
         "version": "0.8.0",
@@ -75,8 +75,8 @@
       ]
     },
     "/home/laptop-hp/Escritorio/FAC ING/TDL/TeoriaDelLenguaje/nft-project/ethereum/contracts/Token721.sol": {
-      "lastModificationDate": 1637509833588,
-      "contentHash": "51c0fe1ac3375f9169b1eae4ac2b5a32",
+      "lastModificationDate": 1637610822552,
+      "contentHash": "19ba25042e3279d83de771c840ddc151",
       "sourceName": "contracts/Token721.sol",
       "solcConfig": {
         "version": "0.8.0",
