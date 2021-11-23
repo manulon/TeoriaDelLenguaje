@@ -7,7 +7,7 @@ const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
 const web3 = createAlchemyWeb3(API_URL);
 
 const contract = require("../artifacts/contracts/Vinylmations.sol/Vinylmations.json");
-const contractAddress = "0x7Ec256aa4CC3661f2a570D1c1D05E0dfd5307fFE";
+const contractAddress = "0xE0245FD0C45FDaBF41a48a2C51ad79e116859D6B";
 const nftContract = new web3.eth.Contract(contract.abi, contractAddress);
 //console.log(JSON.stringify(contract.abi));
 
@@ -43,5 +43,5 @@ async function mintNFT(tokenURI) {
     }).catch((err) => {console.log(" Promise failed:", err)})
 }
 
-mintNFT("https://gateway.pinata.cloud/ipfs/QmTKNKw11NjmiQgB5t6deJ3So7q9EvAafXsUKJFzKVDZLK")
+mintNFT("https://gateway.pinata.cloud/ipfs/QmedkQ6dQmWqo4BH5gs4Rne7pgCziVhS7YhRF3qGsWvExm")
   
