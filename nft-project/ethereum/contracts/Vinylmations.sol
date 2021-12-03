@@ -11,7 +11,7 @@ contract Vinylmations is ERC721 {
     constructor() ERC721("Vinylmations", "VNM") {}
 
     function _baseURI() internal pure override returns (string memory) {
-        return "https://edf7-181-28-126-194.ngrok.io/api/erc721/1?id=";
+        return "https://4b41-181-28-126-194.ngrok.io/api/erc721/1?id=";
     }
 
     function mint(address to) public returns (uint256) {

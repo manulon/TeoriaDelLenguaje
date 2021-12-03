@@ -2,7 +2,7 @@
 pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/utils/Counters.sol";
-import "./Token721.sol";
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
 contract Vinylmotion is Token721{
     using Counters for Counters.Counter;
@@ -12,12 +12,12 @@ contract Vinylmotion is Token721{
 
     function _baseURI() internal pure override returns (string memory) {
         /* The metadata of our NFTs will live in a JSON file at */
-        return "http://localhost:3000/api/erc721/";
+        return "https://4b41-181-28-126-194.ngrok.io/api/erc721/1?id=";
     }
 
     function mint(address to) public returns (uint256) {
         /* Cantidad maxima de nft a minar. */
-        require(_tokenIdCounter.current() < 3); 
+        require(_tokenIdCounter.current() < 1); 
         _tokenIdCounter.increment();
         _safeMint(to, _tokenIdCounter.current());
 

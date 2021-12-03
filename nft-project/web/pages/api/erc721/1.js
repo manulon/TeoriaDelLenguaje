@@ -12,8 +12,8 @@ const metadata = {
             },
         ],
         description: "A sad circle.",
-        image: "https://i.imgur.com/Qkw9N0A.jpeg",
-        name: "Sad Circle",
+        image: "https://i.ibb.co/4SKgg7V/ednaModa.jpg",
+        name: "Edna Moda",
     },
     2: {
         attributes: [
