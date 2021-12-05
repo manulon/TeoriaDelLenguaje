@@ -7,21 +7,21 @@ const contractInterface = contract.abi;
 // https://docs.ethers.io/v5/api/providers
 const provider = ethers.getDefaultProvider("ropsten", {
     alchemy: process.env.DEV_API_URL,
-}); 7
+});
 
 // https://docs.ethers.io/v5/api/signer/#Wallet
 const wallet = new ethers.Wallet(process.env.PRIVATE_KEY, provider);
 
 //https://docs.ethers.io/v5/api/contract/contract
 const emotionalShapes = new ethers.Contract(
-    '0xB97Cf7AC345aE4786Dc87eB486A4E9C4d30dC8d6',
+    '0x5682DC7f745171AA5D77605124fDdBD8CE0e5C41',
     contractInterface,
     wallet
 );
 
 const main = () => {
     emotionalShapes
-        .mint(process.env.PUBLIC_KEY)
+        .mint("0xC6E8aCC276eCb9ad044D530d6E84aB6CfD943c3C")
         .then((transaction) => console.log(transaction))
         .catch((e) => console.log("something went wrong", e));
 };

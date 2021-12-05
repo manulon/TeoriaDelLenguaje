@@ -6,7 +6,7 @@ async function main() {
     const EmotionalShapes = await ethers.getContractFactory("Vinylmations");
     const emotionalShapes = await EmotionalShapes.deploy();
 
-    console.log("vinylmations deployed:", emotionalShapes.address);
+    console.log("Vinylmations deployed:", emotionalShapes.address);
 }
 
 main()
