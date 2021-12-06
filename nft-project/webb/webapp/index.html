@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <meta charset="utf-8">
+  <title>Vinylmations</title>
+</head>
+
+<body>
+  <div class="jumbotron">
+    <h1 class="display-4">Vinylmations</h1>
+    <p class="lead">Sitio para comprar e intercambiar tus vinylmations</p>
+    <hr class="my-4">
+    <p>Cumpla las condiciones requeridas</p>
+    <a class="btn btn-primary btn-lg" href="#" role="button">Leer condiciones</a>
+  </div>
+
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item active" aria-current="page">Mint</li>
+    </ol>
+  </nav>
+  <form>
+    <div class="form-group">
+      <input type="text" class="form-control" id="mintPrivateKey" placeholder="Private Key">
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" id="mintContractAddress" placeholder="Contract address">
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" id="mintAddress" placeholder="Address">
+    </div>
+    <button class="btn btn-secondary" onclick="getFun()">get Fun</button>
+    <script>
+      function getFun() {
+        fetch('http://localhost:3001/api/hello')
+          .then(res => res.json())
+          .then(console.log)
+      }
+    </script>
+  </form>
+  <br>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item active" aria-current="page">Approve</li>
+    </ol>
+  </nav>
+  <form>
+    <div class="form-group">
+      <input type="text" class="form-control" id="approveAddress" placeholder="Address">
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" id="amountToApprove" placeholder="Amount">
+    </div>
+    <button class="btn btn-secondary"
+      onclick="approve(document.getElementById('approveAddress').value, document.getElementById('amountToApprove').value)">APPROVE</button>
+  </form>
+  <br>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item active" aria-current="page">Exchange</li>
+    </ol>
+  </nav>
+  <form>
+    <div class="form-group">
+      <input type="text" class="form-control" id="exchangeAddr1" placeholder="Address 1">
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" id="exchangeToken1" placeholder="Token id">
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" id="exchangeAddr2" placeholder="Address 2">
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" id="exchangeToken2" placeholder="Token id ">
+    </div>
+    <button class="btn btn-secondary"
+      onclick="approve(document.getElementById('exchangeAddr1').value, document.getElementById('exchangeToken1').value, document.getElementById('exchangeAddr2').value, document.getElementById('exchangeToken2').value)">EXCHANGE</button>
+  </form>
+
+</body>
+
+</html>
