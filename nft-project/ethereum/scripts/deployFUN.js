@@ -3,10 +3,10 @@ const { ethers } = require("hardhat");
 
 
 async function main() {
-    const EmotionalShapes = await ethers.getContractFactory("Vinylmations");
-    const emotionalShapes = await EmotionalShapes.deploy();
+    const Fun = await ethers.getContractFactory("Fun");
+    const fun = await Fun.deploy();
 
-    console.log("Vinylmations deployed:", emotionalShapes.address);
+    console.log("Fun deployed:", fun.address);
 }
 
 main()

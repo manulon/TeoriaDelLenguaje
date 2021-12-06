@@ -12,7 +12,7 @@ const metadata = {
             },
         ],
         description: "A sad circle.",
-        image: "https://i.ibb.co/4SKgg7V/ednaModa.jpg",
+        image: "https://i.ibb.co/0hH5CfR/nemo.jpg",
         name: "Edna Moda",
     },
     2: {
@@ -42,7 +42,7 @@ const metadata = {
             },
         ],
         description: "An bored triangle.",
-        image: "https://i.imgur.com/hMVRFoJ.jpeg",
+        image: "https://i.ibb.co/PFdKS14/cars-Hippie.jpg",
         name: "Bored Triangle",
     },
 };
