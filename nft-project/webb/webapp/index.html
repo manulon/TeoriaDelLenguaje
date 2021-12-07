@@ -10,11 +10,17 @@
 
 <body>
   <div class="jumbotron">
-    <h1 class="display-4">Shop Now!</h1>
+    <h1 class="display-4">Comprá ahora</h1>
     <p class="lead">Sitio para comprar e intercambiar tus vinylmations</p>
     <hr class="my-4">
-    <p>Cumpla las condiciones requeridas</p>
-    <a class="btn btn-primary btn-lg" href="#" role="button">Leer condiciones</a>
+    <p>Datos</p>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page">Dirección contrato FUNs:</li>
+        <li class="breadcrumb-item active" aria-current="page">Dirección contrato Vinylmations:</li>
+        <li class="breadcrumb-item active" aria-current="page">Dirección contrato Exchange:</li>
+      </ol>
+    </nav>
   </div>
 
   <div class="jumbotron">
@@ -35,7 +41,7 @@
     <p>Pasos a seguir: </p>
     <p>Pagá el Vinylmation</p>
     <div class="form-group">
-      <input type="text" class="form-control" id="approveAddress" placeholder="Dirección del contrato dueño de los vinylmations">
+      <input type="text" class="form-control" id="approveAddress" placeholder="Dirección del contrato de los vinylmations">
     </div>
     <div class="form-group">
       <input type="text" class="form-control" id="amountToApprove" placeholder="Precio del vinylmation en FUN">
@@ -51,7 +57,7 @@
       <input type="text" class="form-control" id="mintPrivateKey" placeholder="Tu clave privada">
     </div>
     <div class="form-group">
-      <input type="text" class="form-control" id="mintContractAddress" placeholder="Dirección del contrato dueño de los vinylmations">
+      <input type="text" class="form-control" id="mintContractAddress" placeholder="Dirección del contrato de los vinylmations">
     </div>
     <div class="form-group">
       <input type="text" class="form-control" id="mintAddress" placeholder="Tu dirección pública">
@@ -76,7 +82,7 @@
       <input type="text" class="form-control" id="sendTo" placeholder="Dirección pública del usuario 2">
     </div>
     <div class="form-group">
-      <input type="text" class="form-control" id="vinylmationsContractAddr" placeholder="Dirección del contrato con el cual se compró el vinylmation">
+      <input type="text" class="form-control" id="vinylmationsContractAddr" placeholder="Dirección del contrato de los vinylmations">
     </div>
     <button class="btn btn-secondary" onclick="approveVinylmations()">INTERCAMBIAR</button>
     <br><br>
@@ -91,7 +97,7 @@
       <input type="text" class="form-control" id="sendTo" placeholder="Dirección pública del usuario 1">
     </div>
     <div class="form-group">
-      <input type="text" class="form-control" id="vinylmationsContractAddr" placeholder="Dirección del contrato con el cual se compró el vinylmation">
+      <input type="text" class="form-control" id="vinylmationsContractAddr" placeholder="Dirección del contrato de los vinylmations">
     </div>
     <button class="btn btn-secondary" onclick="approveVinylmations()">INTERCAMBIAR</button>
     <br><br>
