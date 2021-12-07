@@ -1,11 +1,7 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 const { ethers } = require("ethers");
-
 
 const funContract = require("../../../../ethereum/artifacts/contracts/Fun.sol/Fun.json");
 const funContractInterface = funContract.abi;
-// https://docs.ethers.io/v5/api/providers
-// https://docs.ethers.io/v5/api/signer/#Wallet
 
 export default function handler(req, res) {
   const provider = ethers.getDefaultProvider("ropsten", {
@@ -13,7 +9,7 @@ export default function handler(req, res) {
   });
   const wallet = new ethers.Wallet(req.query.key, provider);
   const fun = new ethers.Contract(
-    '0x87A3f37B65DA653A004D430F1aAADAC8ece3502c',
+    req.query.contract_addr,
     funContractInterface,
     wallet
   );

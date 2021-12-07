@@ -17,7 +17,7 @@ export default function handler(req, res) {
   switch (req.method) {
 
     case "POST":
-      exchange.exchange_between(req.query.sendTo, req.query.tokenId)
+      exchange.exchange_between(req.query.a1, req.query.t1, req.query.a2, req.query.t2)
         .then((transaction) => res.status(200).json({ "transaction": transaction }))
         .catch((e) => res.status(405).json({ "error": e }));
       break;

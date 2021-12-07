@@ -31,6 +31,9 @@
     <div class="form-group">
       <input type="text" class="form-control" id="getFunPrivateKey" placeholder="Private Key">
     </div>
+    <div class="form-group">
+      <input type="text" class="form-control" id="funContractAddr" placeholder="Dirección del contrato de FUN">
+    </div>
     <button class="btn btn-secondary" onclick="getFun()">GET FUN</button>
   </div>
 
@@ -128,7 +131,8 @@
 
   function getFun() {
     var private_key = document.getElementById('getFunPrivateKey').value;
-    fetch('http://localhost:3000/api/fun?key=' + private_key)
+    var contract_addr = document.getElementById('funContractAddr').value;
+    fetch('http://localhost:3000/api/fun?key=' + private_key + '&contract_addr=' + contract_addr)
       .then(res => res.json())
       .then(console.log)
   }
