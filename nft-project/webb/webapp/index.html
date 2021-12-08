@@ -13,10 +13,10 @@
     <h1 class="display-4">Comprá ahora</h1>
     <p class="lead">Sitio para comprar e intercambiar tus vinylmations</p>
     <hr class="my-4">
-    <p>Datos</p>
+    <button class="btn btn-primary" onclick="getContractAddresses()">Datos</button>
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item active" aria-current="page">Dirección contrato FUNs:</li>
+        <li class="breadcrumb-item active" aria-current="page">${getContractAddresses()}</li>
         <li class="breadcrumb-item active" aria-current="page">Dirección contrato Vinylmations:</li>
         <li class="breadcrumb-item active" aria-current="page">Dirección contrato Exchange:</li>
       </ol>
@@ -43,6 +43,9 @@
     <hr class="my-4">
     <p>Pasos a seguir: </p>
     <p>Pagá el Vinylmation</p>
+    <div class="form-group">
+      <input type="text" class="form-control" id="funContractAddrToApprove" placeholder="Dirección del contrato de los FUN">
+    </div>
     <div class="form-group">
       <input type="text" class="form-control" id="approveAddress" placeholder="Dirección del contrato de los vinylmations">
     </div>
@@ -129,12 +132,21 @@
 
 <script>
 
+  function getContractAddresses() {
+    var addresses = fetch('http://localhost:3000/api/deploy', { method: 'POST'})
+      .then(res => res.json())
+      .then(console.log);
+  }
+
   function getFun() {
     var private_key = document.getElementById('getFunPrivateKey').value;
     var contract_addr = document.getElementById('funContractAddr').value;
     fetch('http://localhost:3000/api/fun?key=' + private_key + '&contract_addr=' + contract_addr)
-      .then(res => res.json())
-      .then(console.log)
+      .then(() => process.exit(0))
+      .catch((error) => {
+          console.error(error);
+          process.exit(1);
+      });
   }
 
   function buyVinylmations() {
@@ -150,8 +162,9 @@
     var private_key = document.getElementById('privateKeyToApprove').value;
     var address = document.getElementById('approveAddress').value;
     var amount = document.getElementById('amountToApprove').value;
+    var contract_addr = document.getElementById('funContractAddrToApprove').value;
 
-    fetch('http://localhost:3000/api/fun?key=' + private_key + '&address=' + address + '&amount=' + amount,
+    fetch('http://localhost:3000/api/fun?key=' + private_key + '&address=' + address + '&amount=' + amount + '&contract_addr=' + contract_addr,
       { method: 'POST'}
     )
       .then(res => res.json())
