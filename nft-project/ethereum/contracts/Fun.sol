@@ -165,10 +165,12 @@ abstract contract ERC_20 is TokenInterface_ERC_20 {
 
 contract Fun is ERC_20 {
     address public tokenOwner;
+    event GetFun(address to);
 
     function getFun(uint256 amount) public {
         require(balances[ownerWallet] >= amount);
         this.transferFrom(ownerWallet, msg.sender, amount);
+        emit GetFun(msg.sender);
     }
 
     constructor() ERC_20(500, "Fun token", 0, "FUN") {

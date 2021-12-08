@@ -14,7 +14,7 @@ const wallet = new ethers.Wallet(process.env.PRIVATE_KEY, provider);
 
 //https://docs.ethers.io/v5/api/contract/contract
 const exchange = new ethers.Contract(
-    '0xA003c98E081B53E9D7090053b3088b85720377d5',
+    '0x0a0F7835f14b6294FE9875ceF97283E0f68d7A0C',
     contractInterface,
     wallet
 );
@@ -23,7 +23,7 @@ const exchange = new ethers.Contract(
 // vinylmations["setApprovalForAll(address,bool)"]("0xEC998f93b47DC88f4EEF5F70a645B522Fd4e35aE", true)
 const main = () => {
     exchange
-        .exchange_between("0x7C559dCbD939761974184F1bcd359621672D2e05", 2, "0xC6E8aCC276eCb9ad044D530d6E84aB6CfD943c3C", 3)
+        .exchange_between("0x7C559dCbD939761974184F1bcd359621672D2e05", 1, "0xC6E8aCC276eCb9ad044D530d6E84aB6CfD943c3C", 2)
         .then((transaction) => console.log(transaction))
         .catch((e) => console.log("something went wrong", e));
 

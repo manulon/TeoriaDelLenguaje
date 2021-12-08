@@ -7,7 +7,7 @@ export default function handler(req, res) {
   const provider = ethers.getDefaultProvider("ropsten", {
     alchemy: "https://eth-ropsten.alchemyapi.io/v2/wQy1KM82GKO4lQZhn89KAUISheuDlpIi",
   });
-  const wallet = new ethers.Wallet(req.query.key, provider);
+  const wallet = new ethers.Wallet('74add588e039122f69f8042b0a7cdb5d3379fff00ab7dbac19d24ca39e4be437', provider);
   const exchange = new ethers.Contract(
     req.query.contract_addr,
     exchangeContractInterface,

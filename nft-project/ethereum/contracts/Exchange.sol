@@ -7,6 +7,8 @@ contract Exchange {
     Vinylmations nfts;
     address operator;
 
+    event Trade(address a1, address a2, uint256 t1, uint256 t2);
+
     //address must be the address where the 721Token is deployed
     constructor(address addr) {
         nfts = Vinylmations(addr);
@@ -27,5 +29,6 @@ contract Exchange {
         );
         nfts.safeTransferFrom(p1, p2, t1);
         nfts.safeTransferFrom(p2, p1, t2);
+        emit Trade(p1, p2, t1, t2);
     }
 }
