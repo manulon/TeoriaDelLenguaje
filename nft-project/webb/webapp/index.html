@@ -13,12 +13,11 @@
     <h1 class="display-4">Comprá ahora</h1>
     <p class="lead">Sitio para comprar e intercambiar tus vinylmations</p>
     <hr class="my-4">
-    <button class="btn btn-primary" onclick="getContractAddresses()">Datos</button>
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item active" aria-current="page">Dirección contrato FUN:</li>
-        <li class="breadcrumb-item active" aria-current="page">Dirección contrato Vinylmations:</li>
-        <li class="breadcrumb-item active" aria-current="page">Dirección contrato Exchange:</li>
+        <li class="breadcrumb-item active" aria-current="page" id="fun_addr">Dirección contrato FUN: 0xA61E76b0B5992790acDAc2108dDc8eAE3bfD67e1</li>
+        <li class="breadcrumb-item active" aria-current="page" id="vnm_addr">Dirección contrato Vinylmations: 0x6B443592b79A1A3C0D2fB0E479961A84dE085d8f</li>
+        <li class="breadcrumb-item active" aria-current="page" id="exc_addr">Dirección contrato Exchange: 0x2e1D4C05afFF3e7F37de85e08ABE955076eb281F</li>
       </ol>
     </nav>
   </div>
@@ -128,12 +127,6 @@
 </body>
 
 <script>
-
-  function getContractAddresses() {
-    var addresses = fetch('http://localhost:3000/api/deploy', { method: 'POST'})
-      .then(res => res.json())
-      .then(console.log);
-  }
 
   function getFun() {
     var private_key = document.getElementById('getFunPrivateKey').value;
