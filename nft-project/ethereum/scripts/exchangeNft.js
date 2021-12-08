@@ -14,7 +14,7 @@ const wallet = new ethers.Wallet(process.env.PRIVATE_KEY, provider);
 
 //https://docs.ethers.io/v5/api/contract/contract
 const exchange = new ethers.Contract(
-    '0xAf90ECcFB525011d14dcA7f471a95D3e215B6d12',
+    '0x0a0F7835f14b6294FE9875ceF97283E0f68d7A0C',
     contractInterface,
     wallet
 );

@@ -24,7 +24,7 @@ contract Vinylmations is ERC721 {
 
         funContract.transferFrom(
             msg.sender, //Quien mintea
-            0x7C559dCbD939761974184F1bcd359621672D2e05, //Direccion del creador de los nfts
+            0xfe42FA5813Bf22DF779f96805AA8C2b40Ce91279, //Direccion del creador de los nfts
             1 //El precio del nft
         );
         _tokenIdCounter.increment();

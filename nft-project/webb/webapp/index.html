@@ -10,76 +10,204 @@
 
 <body>
   <div class="jumbotron">
-    <h1 class="display-4">Vinylmations</h1>
+    <h1 class="display-4">Comprá ahora</h1>
     <p class="lead">Sitio para comprar e intercambiar tus vinylmations</p>
     <hr class="my-4">
-    <p>Cumpla las condiciones requeridas</p>
-    <a class="btn btn-primary btn-lg" href="#" role="button">Leer condiciones</a>
+    <button class="btn btn-primary" onclick="getContractAddresses()">Datos</button>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page">Dirección contrato FUN:</li>
+        <li class="breadcrumb-item active" aria-current="page">Dirección contrato Vinylmations:</li>
+        <li class="breadcrumb-item active" aria-current="page">Dirección contrato Exchange:</li>
+      </ol>
+    </nav>
   </div>
 
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item active" aria-current="page">Mint</li>
-    </ol>
-  </nav>
-  <form>
+  <div class="jumbotron">
+    <h1 class="display-4">FUN</h1>
+    <p class="lead">Conseguí FUNs gratuitamente para comprar Vinylmations - solo pagas gas!</p>
+    <hr class="my-4">
+    <p>Ingrese los datos solicitados</p>
     <div class="form-group">
-      <input type="text" class="form-control" id="mintPrivateKey" placeholder="Private Key">
+      <input type="text" class="form-control" id="getFunPrivateKey" placeholder="Private Key">
     </div>
     <div class="form-group">
-      <input type="text" class="form-control" id="mintContractAddress" placeholder="Contract address">
+      <input type="text" class="form-control" id="funContractAddr" placeholder="Dirección del contrato de FUN">
     </div>
-    <div class="form-group">
-      <input type="text" class="form-control" id="mintAddress" placeholder="Address">
-    </div>
-    <button class="btn btn-secondary" onclick="getFun()">get Fun</button>
-    <script>
-      function getFun() {
-        fetch('http://localhost:3001/api/hello')
-          .then(res => res.json())
-          .then(console.log)
-      }
-    </script>
-  </form>
-  <br>
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item active" aria-current="page">Approve</li>
-    </ol>
-  </nav>
-  <form>
-    <div class="form-group">
-      <input type="text" class="form-control" id="approveAddress" placeholder="Address">
-    </div>
-    <div class="form-group">
-      <input type="text" class="form-control" id="amountToApprove" placeholder="Amount">
-    </div>
-    <button class="btn btn-secondary"
-      onclick="approve(document.getElementById('approveAddress').value, document.getElementById('amountToApprove').value)">APPROVE</button>
-  </form>
-  <br>
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item active" aria-current="page">Exchange</li>
-    </ol>
-  </nav>
-  <form>
-    <div class="form-group">
-      <input type="text" class="form-control" id="exchangeAddr1" placeholder="Address 1">
-    </div>
-    <div class="form-group">
-      <input type="text" class="form-control" id="exchangeToken1" placeholder="Token id">
-    </div>
-    <div class="form-group">
-      <input type="text" class="form-control" id="exchangeAddr2" placeholder="Address 2">
-    </div>
-    <div class="form-group">
-      <input type="text" class="form-control" id="exchangeToken2" placeholder="Token id ">
-    </div>
-    <button class="btn btn-secondary"
-      onclick="approve(document.getElementById('exchangeAddr1').value, document.getElementById('exchangeToken1').value, document.getElementById('exchangeAddr2').value, document.getElementById('exchangeToken2').value)">EXCHANGE</button>
-  </form>
+    <button class="btn btn-secondary" onclick="getFun()">GET FUN</button>
+  </div>
 
+  <div class="jumbotron">
+    <h1 class="display-4">Vinylmations</h1>
+    <p class="lead">Comprá tus vinylmations</p>
+    <hr class="my-4">
+    <p>Pasos a seguir: </p>
+    <p>Pagá el Vinylmation</p>
+    <div class="form-group">
+      <input type="text" class="form-control" id="funContractAddrToApprove" placeholder="Dirección del contrato de los FUN">
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" id="approveAddress" placeholder="Dirección del contrato de los vinylmations">
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" id="amountToApprove" placeholder="Precio del vinylmation en FUN">
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" id="privateKeyToApprove" placeholder="Tu clave privada">
+    </div>
+    <button class="btn btn-secondary" onclick="approveFun()">PAGAR</button>
+    <br>
+    <br>
+    <p>Retira tu vinylmation!</p>
+    <div class="form-group">
+      <input type="text" class="form-control" id="mintPrivateKey" placeholder="Tu clave privada">
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" id="mintContractAddress" placeholder="Dirección del contrato de los vinylmations">
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" id="mintAddress" placeholder="Tu dirección pública">
+    </div>
+    <button class="btn btn-secondary" onclick="buyVinylmations()">RETIRAR VINYLMATION</button>
+  </div>
+  <br>
+
+  <div class="jumbotron">
+    <h1 class="display-4">Intercambia tus vinylmations</h1>
+    <p class="lead">Si no te gustó tu vinylmation podés ponerte de acuerdo con otro usuario e intercambiarlos!</p>
+    <hr class="my-4">
+    <p>Condición de intercambio: haber comprado los vinylmations con el mismo contrato (dueño)</p>
+    <p>Usuario 1</p>
+    <div class="form-group">
+      <input type="text" class="form-control" id="privateKeyToApproveV" placeholder="Clave privada usuario 1">
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" id="tokenId" placeholder="Id del token a intercambiar">
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" id="sendTo" placeholder="Dirección del contrato de intercambio">
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" id="vinylmationsContractAddr" placeholder="Dirección del contrato de los vinylmations">
+    </div>
+    <button class="btn btn-secondary" onclick="approveVinylmations()">INTERCAMBIAR</button>
+    <br><br>
+    <p>Usuario 2</p>
+    <div class="form-group">
+      <input type="text" class="form-control" id="privateKeyToApproveV2" placeholder="Clave privada usuario 2">
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" id="tokenId2" placeholder="Id del token a intercambiar">
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" id="sendTo2" placeholder="Dirección del contrato de intercambio">
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" id="vinylmationsContractAddr2" placeholder="Dirección del contrato de los vinylmations">
+    </div>
+    <button class="btn btn-secondary" onclick="approveVinylmations2()">INTERCAMBIAR</button>
+    <br><br>
+    <p>Intercambio</p>
+    <div class="form-group">
+      <input type="text" class="form-control" id="exchangeAddr1" placeholder="Dirección pública usuario 1">
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" id="exchangeToken1" placeholder="Id del token a intercambiar">
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" id="exchangeAddr2" placeholder="Dirección pública usuario 2">
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" id="exchangeToken2" placeholder="Id del token a intercambiar">
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" id="exchangeContractAddr" placeholder="Dirección del contrato de intercambio">
+    </div>
+    <button class="btn btn-secondary" onclick="exchange()">CONCRETAR INTERCAMBIO</button>
+  </div>
 </body>
 
+<script>
+
+  function getContractAddresses() {
+    var addresses = fetch('http://localhost:3000/api/deploy', { method: 'POST'})
+      .then(res => res.json())
+      .then(console.log);
+  }
+
+  function getFun() {
+    var private_key = document.getElementById('getFunPrivateKey').value;
+    var contract_addr = document.getElementById('funContractAddr').value;
+    fetch('http://localhost:3000/api/fun?key=' + private_key + '&contract_addr=' + contract_addr)
+      .then(() => process.exit(0))
+      .catch((error) => {
+          console.error(error);
+          process.exit(1);
+      });
+  }
+
+  function buyVinylmations() {
+    var private_key = document.getElementById('mintPrivateKey').value;
+    var contract_address = document.getElementById('mintContractAddress').value;
+    var address = document.getElementById('mintAddress').value;
+    fetch('http://localhost:3000/api/vinylmations?address=' + address + '&contract_addr=' + contract_address + '&key=' + private_key)
+      .then(res => res.json())
+      .then(console.log)
+  }
+
+  function approveFun() {
+    var private_key = document.getElementById('privateKeyToApprove').value;
+    var address = document.getElementById('approveAddress').value;
+    var amount = document.getElementById('amountToApprove').value;
+    var contract_addr = document.getElementById('funContractAddrToApprove').value;
+
+    fetch('http://localhost:3000/api/fun?key=' + private_key + '&address=' + address + '&amount=' + amount + '&contract_addr=' + contract_addr,
+      { method: 'POST'}
+    )
+      .then(res => res.json())
+      .then(console.log)
+  }
+
+
+  function approveVinylmations() {
+    var private_key = document.getElementById('privateKeyToApproveV').value;
+    var sendTo = document.getElementById('sendTo').value;
+    var token_id = document.getElementById('tokenId').value;
+    var contract_address = document.getElementById('vinylmationsContractAddr').value;
+
+    fetch('http://localhost:3000/api/vinylmations?sendTo=' + sendTo + '&key=' + private_key + '&tokenId=' + token_id + '&contract_addr=' + contract_address ,
+      { method: 'POST'}
+    )
+      .then(res => res.json())
+      .then(console.log)
+  }
+
+  function approveVinylmations2() {
+    var private_key = document.getElementById('privateKeyToApproveV2').value;
+    var sendTo = document.getElementById('sendTo2').value;
+    var token_id = document.getElementById('tokenId2').value;
+    var contract_address = document.getElementById('vinylmationsContractAddr2').value;
+
+    fetch('http://localhost:3000/api/vinylmations?sendTo=' + sendTo + '&key=' + private_key + '&tokenId=' + token_id + '&contract_addr=' + contract_address ,
+      { method: 'POST'}
+    )
+      .then(res => res.json())
+      .then(console.log)
+  }
+
+  function exchange() {
+    var a1 = document.getElementById('exchangeAddr1').value;
+    var t1 = document.getElementById('exchangeToken1').value;
+    var a2 = document.getElementById('exchangeAddr2').value;
+    var t2 = document.getElementById('exchangeToken2').value;
+    var contract_addr = document.getElementById('exchangeContractAddr').value;
+
+    fetch('http://localhost:3000/api/exchange?contract_addr=' + contract_addr + '&a1=' + a1 + '&t1=' + t1 + '&a2=' + a2 + '&t2=' + t2 ,
+      { method: 'POST'}
+    )
+      .then(res => res.json())
+      .then(console.log)
+  }
+
+</script>
 </html>

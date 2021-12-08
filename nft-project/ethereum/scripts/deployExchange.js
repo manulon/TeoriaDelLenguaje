@@ -4,7 +4,7 @@ const { ethers } = require("hardhat");
 
 async function main() {
     const Exchange = await ethers.getContractFactory("Exchange");
-    const exchange = await Exchange.deploy("0x5682DC7f745171AA5D77605124fDdBD8CE0e5C41");
+    const exchange = await Exchange.deploy("0x6B443592b79A1A3C0D2fB0E479961A84dE085d8f");
 
     console.log("Exchange deployed:", exchange.address);
 }

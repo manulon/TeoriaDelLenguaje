@@ -4,7 +4,7 @@ const { ethers } = require("hardhat");
 
 async function main() {
     const Vinylmations = await ethers.getContractFactory("Vinylmations");
-    const vinylmations = await Vinylmations.deploy("0xf75D2219D624c1a17bD403f7842d214406479E9d");
+    const vinylmations = await Vinylmations.deploy("0xA61E76b0B5992790acDAc2108dDc8eAE3bfD67e1");
 
     console.log("Vinylmations deployed:", vinylmations.address);
 }
