@@ -17,7 +17,7 @@ contract Vinylmotion is Token721{
 
     function mint(address to) public returns (uint256) {
         /* Cantidad maxima de nft a minar. */
-        require(_tokenIdCounter.current() < 1); 
+        require(_tokenIdCounter.current() < 21); 
         _tokenIdCounter.increment();
         _safeMint(to, _tokenIdCounter.current());
 
