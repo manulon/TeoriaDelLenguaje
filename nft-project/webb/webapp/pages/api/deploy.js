@@ -12,18 +12,16 @@ export default async function handler(req, res) {
             const Exchange = await ethers.getContractFactory("Exchange");
             const exchange = await Exchange.deploy(vinylmations.address);
 
-            var addresses = { 
-                fun: fun.address, 
-                vinylmations: vinylmations.address, 
-                exchange: exchange.address
-            };
-
-            console.log(address);
-            return address;
-
+            res.status(200).json({ 
+                "fun": fun.address, 
+                "vinylmations": vinylmations.address, 
+                "exchange": exchange.address
+            });
             break;
+
         case 'GET':
             break;
+
         default:
             break;
     }
