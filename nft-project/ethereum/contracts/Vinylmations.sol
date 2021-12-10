@@ -20,7 +20,7 @@ contract Vinylmations is ERC721 {
 
     function mint(address to) public returns (uint256) {
         require(funContract.allowance(msg.sender, address(this)) >= 1);
-        require(_tokenIdCounter.current() < 10);
+        require(_tokenIdCounter.current() < 21);
 
         funContract.transferFrom(
             msg.sender, //Quien mintea

@@ -10,11 +10,11 @@ const provider = ethers.getDefaultProvider("ropsten", {
 });
 
 // https://docs.ethers.io/v5/api/signer/#Wallet
-const wallet = new ethers.Wallet(process.env.PRIVATE_KEY_AZU, provider);
+const wallet = new ethers.Wallet(process.env.PRIVATE_KEY_FEDE, provider);
 
 //https://docs.ethers.io/v5/api/contract/contract
 const fun = new ethers.Contract(
-    '0x5DF502BB5623E5A486f9ed31bFB6F6a8de84e804',
+    '0x7Ef6a3b0C56534384D8eeD1d8F55fc54eEfC00bd',
     contractInterface,
     wallet
 );
@@ -22,7 +22,7 @@ const fun = new ethers.Contract(
 const main = () => {
     // erc20.aprove(3,"0x5682DC7f745171AA5D77605124fDdBD8CE0e5C41")
     fun
-        .approve("0xc430E9Ad6f68d0E480e864832d07Bd2cE3024bA0", 2)
+        .approve("0x677278B42008Bd654c2245B8666AB7007704F255", 10)
         .then((transaction) => console.log(transaction))
         .catch((e) => console.log("something went wrong", e));
 };
