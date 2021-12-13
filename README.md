@@ -1,5 +1,11 @@
-# TeoriaDelLenguaje
-Trabajo practico de la materia Teoria del Lenguaje
+# Teoria Del Lenguaje
+Trabajo practico de la materia Teoria del Lenguaje sobre Solidity
+
+## Integrantes
+Federico Burman
+Manuel Longo
+Matias Levi Fernandez
+Azul Zaietz
 
 # ngrok 
 El servidor está corriendo en una de nuestras pcs.
