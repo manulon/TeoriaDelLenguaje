@@ -1,9 +1,9 @@
 require("dotenv").config();
 const { ethers } = require("ethers");
 
-const contract = require("../artifacts/contracts/Vinylmations.sol/Vinylmations.json");
+const contract = require("../../artifacts/contracts/Vinylmations.sol/Vinylmations.json");
 const contractInterface = contract.abi;
-const funContract = require("../artifacts/contracts/Fun.sol/Fun.json");
+const funContract = require("../../artifacts/contracts/Fun.sol/Fun.json");
 const funContractInterface = funContract.abi;
 // https://docs.ethers.io/v5/api/providers
 const provider = ethers.getDefaultProvider("ropsten", {

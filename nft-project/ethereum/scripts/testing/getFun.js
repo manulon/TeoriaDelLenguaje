@@ -1,7 +1,7 @@
 require("dotenv").config();
 const { ethers } = require("ethers");
 
-const contract = require("../artifacts/contracts/Fun.sol/Fun.json");
+const contract = require("../../artifacts/contracts/Fun.sol/Fun.json");
 const contractInterface = contract.abi;
 
 // https://docs.ethers.io/v5/api/providers
@@ -22,7 +22,7 @@ const fun = new ethers.Contract(
 const main = () => {
     // erc20.aprove(3,"0x5682DC7f745171AA5D77605124fDdBD8CE0e5C41")
     fun
-        .approve("0x677278B42008Bd654c2245B8666AB7007704F255", 10)
+        .getFun(10)
         .then((transaction) => console.log(transaction))
         .catch((e) => console.log("something went wrong", e));
 };
