@@ -15,3 +15,6 @@ Ejecutar npx hardhat compile desde nft-project/ethereum
 # Ejecutar api next js
 Ejecutar npm run dev desde nft-project/webb/webapp
 La api nextjs debe estar corriendo para que funcione el front end.
+
+# Para ver el front end del proyecto
+Abrir el archivo index.html de la carpeta /nft-project/webb/webapp/
